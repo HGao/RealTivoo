@@ -9,18 +9,20 @@ import java.util.List;
 
 import parsers.CalendarObject;
 
-import com.hp.gagawa.java.elements.A;
-import com.hp.gagawa.java.elements.Body;
-import com.hp.gagawa.java.elements.Div;
+import com.hp.gagawa.java.elements.*;
 
 public class SummaryPageWriter extends AbstractHTMLWriter {
     private HashMap<String, ArrayList<Div>> dayToEventMap;
+    private Html mainHTML;
+    private Head summaryPageHeader;
     private Body summaryPageBody;
     private BufferedWriter out;
 
     public void write(String summaryOutputFile,
             String detailsOutputDirectory, List<CalendarObject> myCalendarObjects) throws IOException {
         
+        mainHTML = new Html();
+        summaryPageHeader = new Head();
         summaryPageBody = new Body();
         dayToEventMap = new HashMap<String, ArrayList<Div>>();
         
@@ -61,8 +63,11 @@ public class SummaryPageWriter extends AbstractHTMLWriter {
             summaryPageBody.appendChild(dayDiv);
 
         }
+        
+        mainHTML.appendChild(summaryPageHeader, summaryPageBody);
+        
         out = new BufferedWriter(new FileWriter(summaryOutputFile));
-        out.write(summaryPageBody.write());
+        out.write(mainHTML.write());
         out.close();
     }
 }

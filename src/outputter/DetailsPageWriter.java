@@ -6,12 +6,13 @@ import java.io.IOException;
 
 import parsers.CalendarObject;
 
-import com.hp.gagawa.java.elements.Body;
-import com.hp.gagawa.java.elements.Div;
+import com.hp.gagawa.java.elements.*;
 
 public class DetailsPageWriter {
     public void write(BufferedWriter out, String detailsOutputDirectory, CalendarObject co) throws IOException
     {
+        Html detailsHTML = new Html();
+        Head detailsHead = new Head();
         Body detailsBody = new Body();
         
         Div nameDiv = new Div();
@@ -28,8 +29,10 @@ public class DetailsPageWriter {
         
         detailsBody.appendChild(nameDiv, startTimeDiv, endTimeDiv);
         
+        detailsHTML.appendChild(detailsHead, detailsBody);
+        
         out = new BufferedWriter(new FileWriter(detailsOutputDirectory+"/"+co.getURLString()+".html"));
-        out.write(detailsBody.write());
+        out.write(detailsHTML.write());
         out.close();
         
     }

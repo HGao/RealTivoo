@@ -1,5 +1,6 @@
 package processors;
 
+import java.io.IOException;
 import java.util.*;
 
 import parsers.CalendarObject;
@@ -14,12 +15,13 @@ public class XMLProcessor {
         }
     };
 
-    public List<CalendarObject> filter(String type, String[] parameters, List<CalendarObject> myCalendarObjects)
+    public List<CalendarObject> filter(String type, String[] parameters, List<CalendarObject> myCalendarObjects) 
     {
-        if (processorFactory.get(type) == null)
-        {
-            System.out.println("404: Filter not found");
-            return null;
+        try {
+            processorFactory.get(type).create();
+            }
+        catch (Exception e){
+            e.printStackTrace();
         }
         
         return processorFactory.get(type).create().filter(parameters, myCalendarObjects);

@@ -1,16 +1,28 @@
 package parsers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import org.joda.time.DateTime;
 
 public class CalendarObject {
-    String eventName;
-    String eventStartTime;
-    String eventEndTime;
+    HashMap<String, String> detailMap = new HashMap<String, String>();
     
-    public CalendarObject(ArrayList<String> details) {
+    ArrayList<String> DETAIL_TYPES = new ArrayList<String>(){
+        {
+            add("eventName");
+            add("eventDescription");
+        }
+    };
+    
+    String eventName;
+    DateTime eventStartTime;
+    DateTime eventEndTime;
+    
+    public CalendarObject(ArrayList<String> details, DateTime startTime, DateTime endTime) {
         eventName = details.get(0);
-        eventStartTime = details.get(1);
-        eventEndTime = details.get(2);
+        eventStartTime = startTime;
+        eventEndTime = endTime;
     }
     
     public String getName() {
@@ -18,15 +30,21 @@ public class CalendarObject {
     }
 
     public String getStartTime() {
-        return eventStartTime;
+        return eventStartTime.getHourOfDay() + ":" 
+                + eventStartTime.getMinuteOfHour();
     }
     
-    public String getStartDay() {
-        return eventStartTime.split(" ")[0];
+    public int getStartDay() {
+        return eventStartTime.getDayOfYear();
     }
     
     public String getEndTime() {
-        return eventEndTime;
+        return eventEndTime.getHourOfDay() + ":"
+                + eventEndTime.getMinuteOfHour();
+    }
+    
+    public int getEndDay() {
+        return eventEndTime.getDayOfYear();
     }
 
     public String getURLString() {
@@ -45,7 +63,7 @@ public class CalendarObject {
                 ret += nameParts[i];
             }
         }
-        String date = eventStartTime.split(" ")[0];
+        String date = Integer.toString(eventStartTime.getDayOfYear());
         String[] dateComponents = date.split("-");
         
         ret = ret+dateComponents[0]+dateComponents[1]+dateComponents[2];
