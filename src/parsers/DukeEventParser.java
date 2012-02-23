@@ -27,38 +27,25 @@ public class DukeEventParser extends AbstractCalendarParser {
         return super.normalizeDate(rawDate);
     }
     
-    @Override
-    public ArrayList<String> parseEndDates(List<Element> eventList) {
-        ArrayList<String> ret = new ArrayList<String>();
-        for (Element e : eventList) {
-            String eventEndTime = normalizeDate(e.getChild("end").getChildText(
-                    "shortdate")
-                    + " " + e.getChild("end").getChildText("time"));
-            ret.add(eventEndTime);
-        }
-        return ret;
-    }
-
-    @Override
     public ArrayList<String> parseNames(List<Element> eventList) {
-        ArrayList<String> ret = new ArrayList<String>();
-        for (Element e : eventList) {
-            String eventName = getEventName(e.getChildText("summary"));
-            ret.add(eventName);
+        ArrayList<String> ret = new ArrayList<String>();;
+        ArrayList<String> rawNameValues = super.parseParameter(eventList, "summary");
+        
+        for (String s: rawNameValues)
+        {
+            ret.add(getEventName(s));
         }
+        
         return ret;
+    }
+    
+    public ArrayList<String> parseEndDates(List<Element> eventList) {
+        return super.parseChildParameters(eventList, "end", "shortdate", "time");
     }
 
-    @Override
     public ArrayList<String> parseStartDates(List<Element> eventList) {
-        ArrayList<String> ret = new ArrayList<String>();
-        for (Element e : eventList) {
-            String eventStartTime = normalizeDate(e.getChild("start")
-                    .getChildText("shortdate")
-                    + " " + e.getChild("start").getChildText("time"));
-            ret.add(eventStartTime);
-        }
-        return ret;
+        return super.parseChildParameters(eventList, "start", "shortdate", "time");
     }
+    
 
 }

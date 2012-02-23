@@ -23,12 +23,14 @@ public class TivooSystem {
     }
 
     public void filterByKeyword(String keyword) {
-        myCalendarObjects = processor.filterByKeyword(keyword, myCalendarObjects);
+        String[] parameters = { keyword };
+        myCalendarObjects = processor.filter("keyword", parameters, myCalendarObjects);
         System.out.println("Only showing events containing '" + keyword + "'!");
     }
     
     public void filterByDate(String startDate, String endDate) {
-        myCalendarObjects = processor.filterByDate(startDate, endDate, myCalendarObjects);
+        String[] parameters = { startDate, endDate };
+        myCalendarObjects = processor.filter("date", parameters, myCalendarObjects);
         System.out.println("Only showing events between on " + startDate + " and " + endDate + "!");
         //consolePrint(myCalendarObjects);
     }

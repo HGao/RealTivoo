@@ -19,24 +19,6 @@ public class XMLTVParser extends AbstractCalendarParser{
         // TODO Auto-generated method stub
         return null;
     }
-
-    @Override
-    public ArrayList<String> parseEndDates(List<Element> eventList) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public ArrayList<String> parseNames(List<Element> eventList) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public ArrayList<String> parseStartDates(List<Element> eventList) {
-        // TODO Auto-generated method stub
-        return null;
-    }
     
 
 

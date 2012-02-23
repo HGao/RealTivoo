@@ -15,7 +15,7 @@ public class DukeBasketballParser extends AbstractCalendarParser {
         ArrayList<String> eventNames = parseNames(eventList);
         ArrayList<String> eventStarts = parseStartDates(eventList);
         ArrayList<String> eventEnds = parseEndDates(eventList);
-        
+
         return super.parseEvents(eventNames, eventStarts, eventEnds);
     }
 
@@ -44,36 +44,25 @@ public class DukeBasketballParser extends AbstractCalendarParser {
         return super.normalizeDate(rawDate);
     }
 
-    @Override
-    public ArrayList<String> parseEndDates(List<Element> eventList) {
-        ArrayList<String> ret = new ArrayList<String>();
-        for (Element e : eventList) {
-            String eventEndTime = normalizeDate(e.getChildText("EndDate") + " "
-                    + e.getChildText("EndTime"));
-            ret.add(eventEndTime);
-        }
-        return ret;
-    }
-
-    @Override
     public ArrayList<String> parseNames(List<Element> eventList) {
         ArrayList<String> ret = new ArrayList<String>();
-        for (Element e : eventList) {
-            String eventName = getEventName(e.getChildText("Subject"));
-            ret.add(eventName);
+        ;
+        ArrayList<String> rawNameValues = super.parseParameter(eventList,
+                "Subject");
+
+        for (String s : rawNameValues) {
+            ret.add(getEventName(s));
         }
+
         return ret;
     }
 
-    @Override
     public ArrayList<String> parseStartDates(List<Element> eventList) {
-        ArrayList<String> ret = new ArrayList<String>();
-        for (Element e : eventList) {
-            String eventStartTime = normalizeDate(e.getChildText("StartDate")
-                    + " " + e.getChildText("StartTime"));
-            ret.add(eventStartTime);
-        }
-        return ret;
+        return super.parseTwoParameters(eventList, "StartDate", "StartTime");
+    }
+
+    public ArrayList<String> parseEndDates(List<Element> eventList) {
+        return super.parseTwoParameters(eventList, "EndDate", "EndTime");
     }
 
 }
