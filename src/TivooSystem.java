@@ -36,7 +36,7 @@ public class TivooSystem {
     }
 
     public void outputSummaryAndDetailsPages(String summaryOutputFile, String detailsOutputDirectory) throws IOException {
-        writer.outputSummaryAndDetailsPages(summaryOutputFile, detailsOutputDirectory, myCalendarObjects);
+        writer.output("summary", summaryOutputFile, detailsOutputDirectory, myCalendarObjects);
     }
     
     private void consolePrint(List<CalendarObject> eventList){

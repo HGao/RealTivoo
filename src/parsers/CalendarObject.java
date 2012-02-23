@@ -1,14 +1,16 @@
 package parsers;
 
+import java.util.ArrayList;
+
 public class CalendarObject {
     String eventName;
     String eventStartTime;
     String eventEndTime;
     
-    public CalendarObject(String name, String start, String end) {
-        eventName = name;
-        eventStartTime = start;
-        eventEndTime = end;
+    public CalendarObject(ArrayList<String> details) {
+        eventName = details.get(0);
+        eventStartTime = details.get(1);
+        eventEndTime = details.get(2);
     }
     
     public String getName() {

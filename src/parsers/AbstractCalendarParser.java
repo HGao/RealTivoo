@@ -14,8 +14,11 @@ public abstract class AbstractCalendarParser {
             List<String> eventStarts, List<String> eventEnds) {
         List<CalendarObject> ret = new ArrayList<CalendarObject>();
         for (int i = 0; i < eventNames.size(); i++) {
-            ret.add(new CalendarObject(eventNames.get(i), eventStarts.get(i),
-                    eventEnds.get(i)));
+            ArrayList<String> details = new ArrayList<String>();
+            details.add(eventNames.get(i));
+            details.add(eventStarts.get(i));
+            details.add(eventEnds.get(i));
+            ret.add(new CalendarObject(details));
         }
 
         return ret;

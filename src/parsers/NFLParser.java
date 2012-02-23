@@ -17,8 +17,12 @@ public class NFLParser extends AbstractCalendarParser {
             String eventName = getEventName(e.getChildText("Col1"));
             String eventStartTime = normalizeDate(e.getChildText("Col8"));
             String eventEndTime = normalizeDate(e.getChildText("Col9"));
-            CalendarObject newEvent = new CalendarObject(eventName,
-                    eventStartTime, eventEndTime);
+            
+            ArrayList<String> details = new ArrayList<String>();
+            details.add(eventName);
+            details.add(eventStartTime);
+            details.add(eventEndTime);
+            CalendarObject newEvent = new CalendarObject(details);
             ret.add(newEvent);
         }
         return ret;
