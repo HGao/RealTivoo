@@ -3,26 +3,25 @@ package parsers;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.joda.time.DateTime;
-
 public class CalendarObject {
     HashMap<String, String> detailMap = new HashMap<String, String>();
     
     ArrayList<String> DETAIL_TYPES = new ArrayList<String>(){
         {
             add("eventName");
-            add("eventDescription");
+            add("eventStartTime");
+            add("eventEndTime");
         }
     };
     
     String eventName;
-    DateTime eventStartTime;
-    DateTime eventEndTime;
+    String eventStartTime;
+    String eventEndTime;
     
-    public CalendarObject(ArrayList<String> details, DateTime startTime, DateTime endTime) {
+    public CalendarObject(ArrayList<String> details) {
         eventName = details.get(0);
-        eventStartTime = startTime;
-        eventEndTime = endTime;
+        eventStartTime = details.get(1);
+        eventEndTime = details.get(2);
     }
     
     public String getName() {
@@ -30,21 +29,15 @@ public class CalendarObject {
     }
 
     public String getStartTime() {
-        return eventStartTime.getHourOfDay() + ":" 
-                + eventStartTime.getMinuteOfHour();
+        return eventStartTime;
     }
     
-    public int getStartDay() {
-        return eventStartTime.getDayOfYear();
+    public String getStartDay() {
+        return eventStartTime.split(" ")[0];
     }
     
     public String getEndTime() {
-        return eventEndTime.getHourOfDay() + ":"
-                + eventEndTime.getMinuteOfHour();
-    }
-    
-    public int getEndDay() {
-        return eventEndTime.getDayOfYear();
+        return eventEndTime;
     }
 
     public String getURLString() {
@@ -63,7 +56,7 @@ public class CalendarObject {
                 ret += nameParts[i];
             }
         }
-        String date = Integer.toString(eventStartTime.getDayOfYear());
+        String date = eventStartTime.split(" ")[0];
         String[] dateComponents = date.split("-");
         
         ret = ret+dateComponents[0]+dateComponents[1]+dateComponents[2];
