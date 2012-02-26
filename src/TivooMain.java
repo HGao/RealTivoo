@@ -6,8 +6,9 @@ public class TivooMain {
         TivooSystem s = new TivooSystem();
         s.loadFile("files/dukecal.xml");
         s.filterByKeyword("duke");
-        s.filterByDate("01-08-2011", "31-12-2012");
+        s.filterByDate("02-01-2012", "02-08-2012");
         s.outputSummaryAndDetailsPages("output/summary.html", "output/details_dir");
 
     }
 }
+     
