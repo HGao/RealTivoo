@@ -6,16 +6,13 @@ import java.util.*;
 import com.hp.gagawa.java.elements.*;
 
 import parsers.CalendarObject;
-import processors.AbstractProcessorFactory;
-import processors.XMLDateProcessorFactory;
-import processors.XMLKeywordProcessorFactory;
 
 public class HTMLWriter {
 
-    private HashMap<String, AbstractHTMLWriterFactory> writerFactory = new HashMap<String, AbstractHTMLWriterFactory>()
+    private HashMap<String, AbstractHTMLWriter> writerFactory = new HashMap<String, AbstractHTMLWriter>()
     {
         {
-          put("summary", new SummaryPageWriterFactory());
+          put("summary", new SummaryPageWriter());
         }
     };
     
@@ -23,13 +20,13 @@ public class HTMLWriter {
             String detailsOutputDirectory, List<CalendarObject> myCalendarObjects) throws IOException {
         
         try {
-            writerFactory.get(outType).create();            
+            writerFactory.get(outType).write(summaryOutputFile, detailsOutputDirectory, myCalendarObjects);            
         }
         catch (Exception e){
             e.printStackTrace();
         }
         
-        writerFactory.get(outType).create().write(summaryOutputFile, detailsOutputDirectory, myCalendarObjects);
+        writerFactory.get(outType).write(summaryOutputFile, detailsOutputDirectory, myCalendarObjects);
     }
     
 }

@@ -1,30 +1,29 @@
 package processors;
 
-import java.io.IOException;
 import java.util.*;
 
 import parsers.CalendarObject;
 
 public class XMLProcessor {
     
-    private HashMap<String, AbstractProcessorFactory> processorFactory = new HashMap<String, AbstractProcessorFactory>()
+    private HashMap<String, AbstractProcessor> processorFactory = new HashMap<String, AbstractProcessor>()
     {
         {
-          put("keyword", new XMLKeywordProcessorFactory());
-          put("date", new XMLDateProcessorFactory());
+          put("keyword", new XMLKeywordProcessor());
+          put("date", new XMLDateProcessor());
         }
     };
 
     public List<CalendarObject> filter(String type, String[] parameters, List<CalendarObject> myCalendarObjects) 
     {
         try {
-            processorFactory.get(type).create();
+            processorFactory.get(type).filter(parameters, myCalendarObjects);
             }
         catch (Exception e){
             e.printStackTrace();
         }
         
-        return processorFactory.get(type).create().filter(parameters, myCalendarObjects);
+        return processorFactory.get(type).filter(parameters, myCalendarObjects);
     }
 
 }

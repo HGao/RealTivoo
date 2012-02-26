@@ -14,35 +14,32 @@ public class CalendarObject {
         }
     };
     
-    String eventName;
-    String eventStartTime;
-    String eventEndTime;
-    
     public CalendarObject(ArrayList<String> details) {
-        eventName = details.get(0);
-        eventStartTime = details.get(1);
-        eventEndTime = details.get(2);
+        for (int i = 0; i < details.size(); i++)
+        {
+            detailMap.put(DETAIL_TYPES.get(i), details.get(i));
+        }
     }
     
     public String getName() {
-        return eventName;
+        return detailMap.get("eventName");
     }
 
     public String getStartTime() {
-        return eventStartTime;
+        return detailMap.get("eventStartTime");
     }
     
     public String getStartDay() {
-        return eventStartTime.split(" ")[0];
+        return detailMap.get("eventStartTime").split(" ")[0];
     }
     
     public String getEndTime() {
-        return eventEndTime;
+        return detailMap.get("eventEndTime");
     }
 
     public String getURLString() {
         String ret = "";
-        String[] nameParts = eventName.split(" ");
+        String[] nameParts = detailMap.get("eventName").split(" ");
         if (nameParts.length < 3){
             for (int i = 0; i < nameParts.length; i++)
             {
@@ -56,7 +53,7 @@ public class CalendarObject {
                 ret += nameParts[i];
             }
         }
-        String date = eventStartTime.split(" ")[0];
+        String date = detailMap.get("eventStartTime").split(" ")[0];
         String[] dateComponents = date.split("-");
         
         ret = ret+dateComponents[0]+dateComponents[1]+dateComponents[2];
