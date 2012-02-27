@@ -16,12 +16,12 @@ public class XMLProcessor {
 
     public List<CalendarObject> filter(String type, String[] parameters, List<CalendarObject> myCalendarObjects) 
     {
-        try {
-            processorFactory.get(type).filter(parameters, myCalendarObjects);
-            }
-        catch (Exception e){
-            e.printStackTrace();
-        }
+//        try {
+//            processorFactory.get(type).filter(parameters, myCalendarObjects);
+//            }
+//        catch (Exception e){
+//            e.printStackTrace();
+//        }
         
         return processorFactory.get(type).filter(parameters, myCalendarObjects);
     }

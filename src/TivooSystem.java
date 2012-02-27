@@ -39,6 +39,7 @@ public class TivooSystem {
         writer.output("summary", summaryOutputFile, detailsOutputDirectory, myCalendarObjects);
     }
     
+    @SuppressWarnings("unused")
     private void consolePrint(List<CalendarObject> eventList){
         for (CalendarObject co : eventList)
         {

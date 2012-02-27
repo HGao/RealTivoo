@@ -1,4 +1,4 @@
-package parsers;
+    package parsers;
 
 import java.util.*;
 
@@ -14,10 +14,6 @@ public class ParserClassifier {
             System.out.println("NFL Calendar detected");
             return new NFLParser();
         }
-//        else if (calendarEvents.get(0).getValue() != null) {
-//            System.out.println("Google Calendar detected");
-//            return new GCalParser();
-//        }
         else if (calendarEvents.get(0).getChild("entityType") != null) {
             System.out.println("Duke Events Calendar detected");
             return new DukeEventParser();
@@ -26,9 +22,13 @@ public class ParserClassifier {
             System.out.println("Duke Basketball Calendar detected");
             return new DukeBasketballParser();
         }
-        else if (calendarEvents.get(0).getChild("programme") != null) {
+        else if (calendarEvents.get(0).getChild("display-name") != null) {
             System.out.println("XMLTV Calendar detected");
             return new XMLTVParser();
+        }
+        else if (calendarEvents.get(0).getText() != null) {
+            System.out.println("Google Calendar detected");
+            return new GCalParser();
         }
         return null;
         

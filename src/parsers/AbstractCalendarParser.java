@@ -1,14 +1,29 @@
 package parsers;
 
-import java.util.ArrayList;
-import java.util.EventObject;
-import java.util.List;
+import java.util.*;
 
 import org.jdom.Element;
 
 public abstract class AbstractCalendarParser {
 
     public abstract List<CalendarObject> parseEvents(List<Element> eventList);
+    
+    private HashMap<String, String> MonthToNumMap = new HashMap<String, String>() {
+        {
+            put("Jan", "01");
+            put("Feb", "02");
+            put("Mar", "03");
+            put("Apr", "04");
+            put("May", "05");
+            put("Jun", "06");
+            put("Jul", "07");
+            put("Aug", "08");
+            put("Sep", "09");
+            put("Oct", "10");
+            put("Nov", "11");
+            put("Dec", "12");
+        }
+    };
 
     public List<CalendarObject> parseEvents(List<String> eventNames,
             List<String> eventStarts, List<String> eventEnds) {
@@ -94,6 +109,10 @@ public abstract class AbstractCalendarParser {
             ret.add(eventStartTime);
         }
         return ret;
+    }
+
+    public String convertMonthNameToNum(String month) {
+        return MonthToNumMap.get(month);
     }
 
 }
