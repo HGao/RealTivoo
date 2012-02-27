@@ -11,6 +11,7 @@ public class CalendarObject {
             add("eventName");
             add("eventStartTime");
             add("eventEndTime");
+            add("description");
         }
     };
     
@@ -35,6 +36,10 @@ public class CalendarObject {
     
     public String getStartDay() {
         return detailMap.get("eventStartTime").split(" ")[0];
+    }
+    
+    public String getEndDay() {
+        return detailMap.get("eventEndTime").split(" ")[0];
     }
     
     public String getStartWeek() {
@@ -81,5 +86,12 @@ public class CalendarObject {
         ret = ret.replaceAll("[^a-zA-Z0-9]", "");
         return ret;
     }
+
+    public String getAttribute(String attribute) {
+        return detailMap.get(attribute);
+    }
+
+
+
 
 }
