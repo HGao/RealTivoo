@@ -29,12 +29,33 @@ public class CalendarObject {
         return detailMap.get("eventStartTime");
     }
     
+    public String getStartHour() {
+        return detailMap.get("eventStartTime").split(" ")[1];
+    }
+    
     public String getStartDay() {
         return detailMap.get("eventStartTime").split(" ")[0];
     }
     
+    public String getStartWeek() {
+        String day = detailMap.get("eventStartTime").split(" ")[0];
+        int weekInt = Integer.parseInt(day.substring(0,2)) / 7;
+        String weekDay = Integer.toString((weekInt * 7) + 1);
+        if (weekDay.length() == 1) weekDay = "0" + weekDay;
+
+        return weekDay + day.substring(2);
+    }
+    
+    public String getStartMonth() {
+        return detailMap.get("eventStartTime").split(" ")[0].substring(3);       
+    }
+    
     public String getEndTime() {
         return detailMap.get("eventEndTime");
+    }
+    
+    public String getEndHour() {
+        return detailMap.get("eventEndTime").split(" ")[1];
     }
 
     public String getURLString() {

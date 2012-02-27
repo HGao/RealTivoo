@@ -11,8 +11,8 @@ import parsers.CalendarObject;
 
 import com.hp.gagawa.java.elements.*;
 
-public class SummaryPageWriter extends AbstractHTMLWriter {
-    private HashMap<String, ArrayList<Div>> dayToEventMap;
+public class MonthWriter extends AbstractHTMLWriter {
+    private HashMap<String, ArrayList<Div>> monthToEventMap;
     private Html mainHTML;
     private Head summaryPageHeader;
     private Body summaryPageBody;
@@ -24,7 +24,7 @@ public class SummaryPageWriter extends AbstractHTMLWriter {
         mainHTML = new Html();
         summaryPageHeader = new Head();
         summaryPageBody = new Body();
-        dayToEventMap = new HashMap<String, ArrayList<Div>>();
+        monthToEventMap = new HashMap<String, ArrayList<Div>>();
         
         for (CalendarObject co : myCalendarObjects)
         {
@@ -40,27 +40,27 @@ public class SummaryPageWriter extends AbstractHTMLWriter {
             link.appendText(co.getName());
             div.appendChild(link); 
             
-            if (!dayToEventMap.containsKey(co.getStartDay()))
+            if (!monthToEventMap.containsKey(co.getStartMonth()))
             {
-                dayToEventMap.put(co.getStartDay(), new ArrayList<Div>());
+                monthToEventMap.put(co.getStartMonth(), new ArrayList<Div>());
             }
-            dayToEventMap.get(co.getStartDay()).add(div);
+            monthToEventMap.get(co.getStartMonth()).add(div);
 
         }
 
-        for (String s : dayToEventMap.keySet())
+        for (String s : monthToEventMap.keySet())
         {
-            Div dayDiv = new Div();
-            dayDiv.setId("dayDiv").setCSSClass("myclass");
-            dayDiv.appendText("Events on the day of " + s);
-            for (Div d : dayToEventMap.get(s))
+            Div monthDiv = new Div();
+            monthDiv.setId("monthDiv").setCSSClass("myclass");
+            monthDiv.appendText("Events in the month of " + s);
+            for (Div d : monthToEventMap.get(s))
             {
-                dayDiv.appendChild(d);
+                monthDiv.appendChild(d);
             }
             
-            dayDiv.appendText("\n");
+            monthDiv.appendText("\n");
 
-            summaryPageBody.appendChild(dayDiv);
+            summaryPageBody.appendChild(monthDiv);
 
         }
         

@@ -11,8 +11,8 @@ import parsers.CalendarObject;
 
 import com.hp.gagawa.java.elements.*;
 
-public class SummaryPageWriter extends AbstractHTMLWriter {
-    private HashMap<String, ArrayList<Div>> dayToEventMap;
+public class WeekWriter extends AbstractHTMLWriter {
+    private HashMap<String, ArrayList<Div>> weekToEventMap;
     private Html mainHTML;
     private Head summaryPageHeader;
     private Body summaryPageBody;
@@ -24,7 +24,7 @@ public class SummaryPageWriter extends AbstractHTMLWriter {
         mainHTML = new Html();
         summaryPageHeader = new Head();
         summaryPageBody = new Body();
-        dayToEventMap = new HashMap<String, ArrayList<Div>>();
+        weekToEventMap = new HashMap<String, ArrayList<Div>>();
         
         for (CalendarObject co : myCalendarObjects)
         {
@@ -40,27 +40,27 @@ public class SummaryPageWriter extends AbstractHTMLWriter {
             link.appendText(co.getName());
             div.appendChild(link); 
             
-            if (!dayToEventMap.containsKey(co.getStartDay()))
+            if (!weekToEventMap.containsKey(co.getStartWeek()))
             {
-                dayToEventMap.put(co.getStartDay(), new ArrayList<Div>());
+                weekToEventMap.put(co.getStartWeek(), new ArrayList<Div>());
             }
-            dayToEventMap.get(co.getStartDay()).add(div);
+            weekToEventMap.get(co.getStartWeek()).add(div);
 
         }
 
-        for (String s : dayToEventMap.keySet())
+        for (String s : weekToEventMap.keySet())
         {
-            Div dayDiv = new Div();
-            dayDiv.setId("dayDiv").setCSSClass("myclass");
-            dayDiv.appendText("Events on the day of " + s);
-            for (Div d : dayToEventMap.get(s))
+            Div weekDiv = new Div();
+            weekDiv.setId("weekDiv").setCSSClass("myclass");
+            weekDiv.appendText("Events on the week of " + s);
+            for (Div d : weekToEventMap.get(s))
             {
-                dayDiv.appendChild(d);
+                weekDiv.appendChild(d);
             }
             
-            dayDiv.appendText("\n");
+            weekDiv.appendText("\n");
 
-            summaryPageBody.appendChild(dayDiv);
+            summaryPageBody.appendChild(weekDiv);
 
         }
         

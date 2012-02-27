@@ -13,6 +13,10 @@ public class HTMLWriter {
     {
         {
           put("summary", new SummaryPageWriter());
+          put("week", new WeekWriter());
+          put("month", new MonthWriter());
+          put("conflict", new ConflictWriter());
+
         }
     };
     

@@ -16,10 +16,11 @@ public class TivooSystem {
         parser = new XMLParser();
         processor = new XMLProcessor();
         writer = new HTMLWriter();
+        myCalendarObjects = new ArrayList<CalendarObject>();
     }
 
     public void loadFile(String filename) {
-        myCalendarObjects = parser.loadFile(filename);
+        myCalendarObjects.addAll(parser.loadFile(filename));
     }
 
     public void filterByKeyword(String keyword) {
@@ -37,6 +38,18 @@ public class TivooSystem {
 
     public void outputSummaryAndDetailsPages(String summaryOutputFile, String detailsOutputDirectory) throws IOException {
         writer.output("summary", summaryOutputFile, detailsOutputDirectory, myCalendarObjects);
+    }
+
+    public void outputMonthSummary(String summaryOutputFile, String detailsOutputDirectory) throws IOException {
+        writer.output("month", summaryOutputFile, detailsOutputDirectory, myCalendarObjects);
+    }
+
+    public void outputWeekSummary(String summaryOutputFile, String detailsOutputDirectory) throws IOException {
+        writer.output("week", summaryOutputFile, detailsOutputDirectory, myCalendarObjects);
+    }
+    
+    public void outputConflictSummary(String summaryOutputFile, String detailsOutputDirectory) throws IOException {
+        writer.output("conflict", summaryOutputFile, detailsOutputDirectory, myCalendarObjects);
     }
     
     @SuppressWarnings("unused")
