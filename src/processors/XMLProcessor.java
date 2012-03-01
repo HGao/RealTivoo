@@ -11,14 +11,7 @@ public class XMLProcessor {
         {
           put("keyword", new XMLKeywordProcessor());
           put("date", new XMLDateProcessor());
-          put("noKeyword", new XMLKeywordExcludeProcessor());
-          put("attributeKeyword", new XMLAttributeKeywordProcessor());
-          put("attributeNoKeyword", new XMLAttributeKeywordExcludeProcessor());      
-          put("sortName", new XMLNameSortProcessor());        
-          put("sortStart", new XMLStartDateSortProcessor());        
-          put("sortEnd", new XMLEndDateSortProcessor());        
-
-         }
+        }
     };
 
     public List<CalendarObject> filter(String type, String[] parameters, List<CalendarObject> myCalendarObjects) 

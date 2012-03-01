@@ -15,7 +15,6 @@ public class HTMLWriter {
           put("week", new WeekWriter());
           put("month", new MonthWriter());
           put("conflict", new ConflictWriter());
-          put("sorted", new SortedDateWriter());
 
         }
     };

@@ -12,13 +12,11 @@ public class TivooMain {
         //can filter by two or more filters
         s.filterByKeyword("duke");
         s.filterByDate("02-08-2011", "02-08-2012");
-        s.sortByStartDate();
 
         s.outputSummaryAndDetailsPages("output/summary.html", "output/details_dir");
         s.outputMonthSummary("output/monthsummary.html", "output/details_dir");
         s.outputWeekSummary("output/weeksummary.html", "output/details_dir");
         s.outputConflictSummary("output/conflictsummary.html", "output/details_dir");
-        s.outputSortedSummary("output/sortedsummary.html", "output/details_dir");
 
     }
 }
