@@ -33,8 +33,8 @@ public class XMLParser {
             Element currentEvent = (Element) list.get(i);
             eventList.add(currentEvent);
         }
-        ParserClassifier pc = new ParserClassifier();
-        AbstractCalendarParser acp = pc.getParserType(eventList);
+        ParserClassifier pc = new ParserClassifier(filename);
+        AbstractCalendarParser acp = pc.getParserType();
         ret = acp.parseEvents(eventList);
         System.out.println(ret.size() + " events parsed");
         return ret;

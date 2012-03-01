@@ -64,5 +64,22 @@ public class DukeBasketballParser extends AbstractCalendarParser {
     public ArrayList<String> parseEndDates(List<Element> eventList) {
         return super.parseTwoParameters(eventList, "EndDate", "EndTime");
     }
+    
+    
+    public static class Factory extends AbstractCalendarParser.ParserFactory {
+    	
+    	public boolean isThisParserType (String url) {
+    		return url.toLowerCase().contains("dukebasketball");
+    	}
+    	
+    	public String getTypeOfCalendarDetected() {
+    		return "Duke Basketball Calendar";
+    	}
+    	
+    	public AbstractCalendarParser getParser() {
+    		return new DukeBasketballParser();
+    	}
+
+    }
 
 }

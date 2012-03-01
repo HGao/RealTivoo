@@ -114,5 +114,15 @@ public abstract class AbstractCalendarParser {
     public String convertMonthNameToNum(String month) {
         return MonthToNumMap.get(month);
     }
+    
+    
+    public static abstract class ParserFactory {
+    	
+    	public abstract boolean isThisParserType (String url);
+    	
+    	public abstract String getTypeOfCalendarDetected ();
+    	
+    	public abstract AbstractCalendarParser getParser ();
+    }
 
 }

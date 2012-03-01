@@ -3,13 +3,12 @@ package outputter;
 import java.io.*;
 import java.util.*;
 
-import com.hp.gagawa.java.elements.*;
-
 import parsers.CalendarObject;
 
 public class HTMLWriter {
 
-    private HashMap<String, AbstractHTMLWriter> writerFactory = new HashMap<String, AbstractHTMLWriter>()
+    @SuppressWarnings("serial")
+	private HashMap<String, AbstractHTMLWriter> writerFactory = new HashMap<String, AbstractHTMLWriter>()
     {
         {
           put("summary", new SummaryPageWriter());
@@ -30,8 +29,6 @@ public class HTMLWriter {
         catch (Exception e){
             e.printStackTrace();
         }
-        
-        writerFactory.get(outType).write(summaryOutputFile, detailsOutputDirectory, myCalendarObjects);
     }
     
 }
