@@ -9,17 +9,7 @@ public class XMLKeywordProcessor extends AbstractProcessor{
     public List<CalendarObject> filter(String[] keyword,
             List<CalendarObject> myCalendarObjects) {
     	
-<<<<<<< HEAD
         return super.filter(keyword, myCalendarObjects);
-=======
-        List<CalendarObject> ret = new ArrayList<CalendarObject>();
-        for (CalendarObject co : myCalendarObjects) {
-            if (co.getName().toLowerCase().contains(keyword[0].toLowerCase())) {
-                ret.add(co);
-            }
-        }
-        return ret;
->>>>>>> parent of 3bef393... part 2 code complete
     }
     
     public boolean meetsFilterCriterion(CalendarObject co, String[] filters) {
