@@ -29,35 +29,12 @@ public abstract class AbstractProcessor {
     }
     
     @SuppressWarnings("unchecked")
-    public List<CalendarObject> sort(String[] keyword, List<CalendarObject> myCalendarObjects) {
+    public List<CalendarObject> sort(String[] keyword, List<CalendarObject> myCalendarObjects, Comparator comp) {
 
         List<CalendarObject> ret = new ArrayList<CalendarObject>();
         ret = myCalendarObjects;
 
-        Collections.sort(ret, new Comparator() {
-
-            public int compare(Object o1, Object o2) {
-                CalendarObject p1 = (CalendarObject) o1;
-                CalendarObject p2 = (CalendarObject) o2;
-                return p1.getStartTime().compareToIgnoreCase(p2.getStartTime());
-            }
-            
-            public int compareName(CalendarObject p1, CalendarObject p2) {
-                return p1.getName().compareToIgnoreCase(p2.getName());
-
-            }
-            
-            public int compareStartTime(CalendarObject p1, CalendarObject p2) {
-                return p1.getStartTime().compareToIgnoreCase(p2.getStartTime());
-
-            }
-            
-            public int compareEndTime(CalendarObject p1, CalendarObject p2) {
-                return p1.getEndTime().compareToIgnoreCase(p2.getEndTime());
-
-            }
-
-        });
+        Collections.sort(ret, comp);
         return ret;
     }  
     
