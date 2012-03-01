@@ -42,6 +42,10 @@ public class CalendarObject {
         return detailMap.get("eventEndTime").split(" ")[0];
     }
     
+    public String getByKey(String key) {            
+        return detailMap.get(key);
+    }
+    
     public String getStartWeek() {
         String day = detailMap.get("eventStartTime").split(" ")[0];
         int weekInt = Integer.parseInt(day.substring(0,2)) / 7;

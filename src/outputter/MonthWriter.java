@@ -50,9 +50,8 @@ public class MonthWriter extends AbstractHTMLWriter {
 
         for (String s : monthToEventMap.keySet())
         {
-            Div monthDiv = new Div();
-            monthDiv.setId("monthDiv").setCSSClass("myclass");
-            monthDiv.appendText("Events in the month of " + s);
+            Div monthDiv = super.makeDiv("monthDiv", "Events in the month of " + s);
+
             for (Div d : monthToEventMap.get(s))
             {
                 monthDiv.appendChild(d);

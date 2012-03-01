@@ -50,9 +50,7 @@ public class WeekWriter extends AbstractHTMLWriter {
 
         for (String s : weekToEventMap.keySet())
         {
-            Div weekDiv = new Div();
-            weekDiv.setId("weekDiv").setCSSClass("myclass");
-            weekDiv.appendText("Events on the week of " + s);
+            Div weekDiv = super.makeDiv("weekDiv", "Events on the week of " + s);
             for (Div d : weekToEventMap.get(s))
             {
                 weekDiv.appendChild(d);

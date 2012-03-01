@@ -38,8 +38,19 @@ public abstract class AbstractCalendarParser {
 
         return ret;
     }
+    
+    public ArrayList<String> parseNames(List<Element> eventList, String parameter) {
+        ArrayList<String> ret = new ArrayList<String>();
+        ArrayList<String> rawNameValues = parseParameter(eventList, parameter);
 
-    public abstract String getEventName(String rawEventName);
+        for (String s : rawNameValues) {
+            ret.add(getEventName(s));
+        }
+
+        return ret;
+    }
+    
+    
 
     protected String trim(String str) {
         return str.substring(0, str.length() - 1);
@@ -111,6 +122,10 @@ public abstract class AbstractCalendarParser {
         return ret;
     }
 
+    public String getEventName(String rawEventName) {
+        return rawEventName;
+    }    
+    
     public String convertMonthNameToNum(String month) {
         return MonthToNumMap.get(month);
     }

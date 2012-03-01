@@ -52,9 +52,7 @@ public class ConflictWriter extends AbstractHTMLWriter {
         }
 
         for (String s : dayToEventMap.keySet()) {
-            Div dayDiv = new Div();
-            dayDiv.setId("dayDiv").setCSSClass("myclass");
-            dayDiv.appendText("Events on the day of " + s);
+            Div dayDiv = super.makeDiv("dayDiv", "Events on the day of " + s);
             boolean hasConflict = false;
             for (int i = 0; i < dayToEventMap.get(s).size() - 1; i++)
             {

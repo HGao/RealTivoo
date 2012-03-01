@@ -1,6 +1,8 @@
 package processors;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import parsers.CalendarObject;
@@ -25,6 +27,16 @@ public abstract class AbstractProcessor {
     	
     	return ret;
     }
+    
+    @SuppressWarnings("unchecked")
+    public List<CalendarObject> sort(String[] keyword, List<CalendarObject> myCalendarObjects, Comparator comp) {
+
+        List<CalendarObject> ret = new ArrayList<CalendarObject>();
+        ret = myCalendarObjects;
+
+        Collections.sort(ret, comp);
+        return ret;
+    }  
     
     /**
      * Returns boolean indicating whether a given CalendarObject

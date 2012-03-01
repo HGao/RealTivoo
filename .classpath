@@ -2,8 +2,20 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
-	<classpathentry kind="lib" path="C:/Users/Hui/Desktop/CS108/spring12_cps108_07_tivoo/jdom/build/jdom-1.1.2.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Hui/Desktop/CS108/spring12_cps108_07_tivoo/gagawa/gagawa-1.0.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Hui/Desktop/CS108/spring12_cps108_07_tivoo/joda/joda-time-2.1.jar"/>
+	<classpathentry kind="lib" path="/Users/peggyli/Desktop/Computer Science/Java Libraries/gagawa-1.0.1.jar" sourcepath="/Users/peggyli/Desktop/Computer Science/Java Libraries/gagawa-read-only/gagawa">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/Users/peggyli/Desktop/Computer Science/Java Libraries/gagawa-1.0.1.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/Users/peggyli/Desktop/Computer Science/Java Libraries/jdom/build/jdom-1.1.2.jar" sourcepath="/Users/peggyli/Desktop/Computer Science/Java Libraries/jdom/build/jdom-1.1.2-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/Users/peggyli/Desktop/Computer Science/Java Libraries/jdom/build/jdom-1.1.2-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/Users/peggyli/Desktop/Computer Science/Java Libraries/joda-time-2.1/joda-time-2.1.jar" sourcepath="/Users/peggyli/Desktop/Computer Science/Java Libraries/joda-time-2.1/joda-time-2.1-sources.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="jar:file:/Users/peggyli/Desktop/Computer Science/Java Libraries/joda-time-2.1/joda-time-2.1-javadoc.jar!/"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
