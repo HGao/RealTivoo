@@ -19,15 +19,7 @@ public class GCalParser extends AbstractCalendarParser {
         
         return super.parseEvents(eventNames, eventStarts, eventEnds);
     }
-
-    public String getEventName(String rawEventName) {
-        return rawEventName;
-    }
-
-    public String normalizeDate(String rawDate) {
-        return super.normalizeDate(rawDate);
-    }
-
+    
     public ArrayList<String> parseNames(List<Element> eventList) {
         ArrayList<String> eventNameList = new ArrayList<String>();
         for (int i = 17; i < eventList.size(); i++) {

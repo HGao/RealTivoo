@@ -28,6 +28,7 @@ public class NFLParser extends AbstractCalendarParser {
         return ret;
     }
 
+    @Override
     public String getEventName(String rawEventName) {
         String team1 = rawEventName.split("[ ]+")[3];
         String team2 = rawEventName.split("[ ]+")[5];

@@ -18,25 +18,9 @@ public class DukeEventParser extends AbstractCalendarParser {
         
         return super.parseEvents(eventNames, eventStarts, eventEnds);
     }
-
-    public String getEventName(String rawEventName) {
-        return rawEventName;
-    }
-
-    public String normalizeDate(String rawDate) {
-        return super.normalizeDate(rawDate);
-    }
     
     public ArrayList<String> parseNames(List<Element> eventList) {
-        ArrayList<String> ret = new ArrayList<String>();;
-        ArrayList<String> rawNameValues = super.parseParameter(eventList, "summary");
-        
-        for (String s: rawNameValues)
-        {
-            ret.add(getEventName(s));
-        }
-        
-        return ret;
+        return super.parseNames(eventList, "summary");
     }
     
     public ArrayList<String> parseEndDates(List<Element> eventList) {

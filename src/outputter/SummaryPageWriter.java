@@ -50,9 +50,7 @@ public class SummaryPageWriter extends AbstractHTMLWriter {
 
         for (String s : dayToEventMap.keySet())
         {
-            Div dayDiv = new Div();
-            dayDiv.setId("dayDiv").setCSSClass("myclass");
-            dayDiv.appendText("Events on the day of " + s);
+            Div dayDiv = super.makeDiv("dayDiv", "Events on the day of " + s);
             for (Div d : dayToEventMap.get(s))
             {
                 dayDiv.appendChild(d);

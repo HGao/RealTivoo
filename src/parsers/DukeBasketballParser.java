@@ -19,6 +19,7 @@ public class DukeBasketballParser extends AbstractCalendarParser {
         return super.parseEvents(eventNames, eventStarts, eventEnds);
     }
 
+    @Override
     public String getEventName(String rawEventName) {
         String[] rawEventData = rawEventName.split(" ");
         String team1 = "";
@@ -40,21 +41,8 @@ public class DukeBasketballParser extends AbstractCalendarParser {
         return trim(team1) + " @ " + trim(team2);
     }
 
-    public String normalizeDate(String rawDate) {
-        return super.normalizeDate(rawDate);
-    }
-
     public ArrayList<String> parseNames(List<Element> eventList) {
-        ArrayList<String> ret = new ArrayList<String>();
-        ;
-        ArrayList<String> rawNameValues = super.parseParameter(eventList,
-                "Subject");
-
-        for (String s : rawNameValues) {
-            ret.add(getEventName(s));
-        }
-
-        return ret;
+        return super.parseNames(eventList, "Subject");
     }
 
     public ArrayList<String> parseStartDates(List<Element> eventList) {
