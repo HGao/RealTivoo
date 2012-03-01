@@ -28,44 +28,15 @@ public class WeekWriter extends AbstractHTMLWriter {
         
         for (CalendarObject co : myCalendarObjects)
         {
-            Div div = new Div();
-            div.setId("eventDiv").setCSSClass("myclass");
-    
-            DetailsPageWriter dpw = new DetailsPageWriter();
-            dpw.write(out, detailsOutputDirectory, co);
-            
-            A link = new A();
-            link.setHref(detailsOutputDirectory.replace("output/","")+"/"+co.getURLString()+".html").setTarget("_blank");
-                            
-            link.appendText(co.getName());
-            div.appendChild(link); 
-            
-            if (!weekToEventMap.containsKey(co.getStartWeek()))
-            {
-                weekToEventMap.put(co.getStartWeek(), new ArrayList<Div>());
-            }
-            weekToEventMap.get(co.getStartWeek()).add(div);
-
+            super.addEvent(out, detailsOutputDirectory, co, weekToEventMap, co.getStartWeek());
         }
 
         for (String s : weekToEventMap.keySet())
-        {
-            Div weekDiv = super.makeDiv("weekDiv", "Events on the week of " + s);
-            for (Div d : weekToEventMap.get(s))
-            {
-                weekDiv.appendChild(d);
-            }
-            
-            weekDiv.appendText("\n");
-
-            summaryPageBody.appendChild(weekDiv);
-
+        {   
+            super.addDiv(s, weekToEventMap, summaryPageBody, "weekDiv", "Events on the week of " + s);
         }
-        
-        mainHTML.appendChild(summaryPageHeader, summaryPageBody);
-        
-        out = new BufferedWriter(new FileWriter(summaryOutputFile));
-        out.write(mainHTML.write());
-        out.close();
+                
+        super.writeHTML(out, summaryOutputFile, mainHTML, summaryPageHeader, summaryPageBody);
+
     }
 }

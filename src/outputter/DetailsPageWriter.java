@@ -14,18 +14,10 @@ public class DetailsPageWriter {
         Html detailsHTML = new Html();
         Head detailsHead = new Head();
         Body detailsBody = new Body();
-        
-        Div nameDiv = new Div();
-        nameDiv.setId("nameDiv").setCSSClass("myClass");
-        nameDiv.appendText("Event name: " + co.getName());
-        
-        Div startTimeDiv = new Div();
-        startTimeDiv.setId("startTimeDiv").setCSSClass("myClass");
-        startTimeDiv.appendText("Event start time: " + co.getStartTime());
-        
-        Div endTimeDiv = new Div();
-        endTimeDiv.setId("endTimeDiv").setCSSClass("myClass");
-        endTimeDiv.appendText("Event end time: " + co.getEndTime());
+               
+        Div nameDiv = AbstractHTMLWriter.makeDiv("nameDiv", "Event name: " + co.getName());
+        Div startTimeDiv = AbstractHTMLWriter.makeDiv("startTimeDiv", "Event start time: " + co.getStartTime());
+        Div endTimeDiv = AbstractHTMLWriter.makeDiv("endTimeDiv", "Event end time: " + co.getEndTime());
         
         detailsBody.appendChild(nameDiv, startTimeDiv, endTimeDiv);
         

@@ -15,7 +15,6 @@ public class SortedDateWriter extends AbstractHTMLWriter {
     private Body summaryPageBody;
     private BufferedWriter out;
 
-    @SuppressWarnings("unchecked")
     public void write(String summaryOutputFile, String detailsOutputDirectory,
             List<CalendarObject> myCalendarObjects) throws IOException {
 
@@ -33,9 +32,7 @@ public class SortedDateWriter extends AbstractHTMLWriter {
             dpw.write(out, detailsOutputDirectory, co);
 
             A link = new A();
-            link.setHref(
-                    detailsOutputDirectory.replace("output/", "") + "/"
-                            + co.getURLString() + ".html").setTarget("_blank");
+            link.setHref(detailsOutputDirectory.replace("output/", "") + "/" + co.getURLString() + ".html").setTarget("_blank");
 
             link.appendText(co.getName());
             div.appendChild(link);
@@ -48,7 +45,7 @@ public class SortedDateWriter extends AbstractHTMLWriter {
         }
 
         List<String> allDivs = new ArrayList<String>(dayToEventMap.keySet());
-        Collections.sort(allDivs, new Comparator() {
+        Collections.sort(allDivs, new Comparator<Object>() {
 
             public int compare(Object o1, Object o2) {
                 return reformat((String) o1).compareToIgnoreCase(reformat((String) o2));
@@ -62,21 +59,13 @@ public class SortedDateWriter extends AbstractHTMLWriter {
         
         
         for (String s : allDivs) {
-            Div dayDiv = super.makeDiv("dayDiv", "Events on the day of " + s);
-            for (Div d : dayToEventMap.get(s)) {
-                dayDiv.appendChild(d);
-            }
+            
+            super.addDiv(s, dayToEventMap, summaryPageBody, "dayDiv", "Events on the day of " + s);
 
-            dayDiv.appendText("\n");
-
-            summaryPageBody.appendChild(dayDiv);
 
         }
 
-        mainHTML.appendChild(summaryPageHeader, summaryPageBody);
+        super.writeHTML(out, summaryOutputFile, mainHTML, summaryPageHeader, summaryPageBody);
 
-        out = new BufferedWriter(new FileWriter(summaryOutputFile));
-        out.write(mainHTML.write());
-        out.close();
     }
 }

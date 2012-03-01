@@ -28,45 +28,15 @@ public class MonthWriter extends AbstractHTMLWriter {
         
         for (CalendarObject co : myCalendarObjects)
         {
-            Div div = new Div();
-            div.setId("eventDiv").setCSSClass("myclass");
-    
-            DetailsPageWriter dpw = new DetailsPageWriter();
-            dpw.write(out, detailsOutputDirectory, co);
-            
-            A link = new A();
-            link.setHref(detailsOutputDirectory.replace("output/","")+"/"+co.getURLString()+".html").setTarget("_blank");
-                            
-            link.appendText(co.getName());
-            div.appendChild(link); 
-            
-            if (!monthToEventMap.containsKey(co.getStartMonth()))
-            {
-                monthToEventMap.put(co.getStartMonth(), new ArrayList<Div>());
-            }
-            monthToEventMap.get(co.getStartMonth()).add(div);
-
+            super.addEvent(out, detailsOutputDirectory, co, monthToEventMap, co.getStartMonth());
         }
 
         for (String s : monthToEventMap.keySet())
         {
-            Div monthDiv = super.makeDiv("monthDiv", "Events in the month of " + s);
-
-            for (Div d : monthToEventMap.get(s))
-            {
-                monthDiv.appendChild(d);
-            }
-            
-            monthDiv.appendText("\n");
-
-            summaryPageBody.appendChild(monthDiv);
-
+            super.addDiv(s, monthToEventMap, summaryPageBody, "monthDiv", "Events on the month of " + s);
         }
-        
-        mainHTML.appendChild(summaryPageHeader, summaryPageBody);
-        
-        out = new BufferedWriter(new FileWriter(summaryOutputFile));
-        out.write(mainHTML.write());
-        out.close();
+                
+        super.writeHTML(out, summaryOutputFile, mainHTML, summaryPageHeader, summaryPageBody);
+
     }
 }

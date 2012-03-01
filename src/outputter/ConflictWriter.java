@@ -69,17 +69,14 @@ public class ConflictWriter extends AbstractHTMLWriter {
 
             if (hasConflict) {
                 summaryPageBody.appendChild(dayDiv);
-                summaryPageBody.appendText("</br>");
+                summaryPageBody.appendChild(new Br());
 
             }
 
         }
 
-        mainHTML.appendChild(summaryPageHeader, summaryPageBody);
+        super.writeHTML(out, summaryOutputFile, mainHTML, summaryPageHeader, summaryPageBody);
 
-        out = new BufferedWriter(new FileWriter(summaryOutputFile));
-        out.write(mainHTML.write());
-        out.close();
     }
 
     private boolean conflict(Div event1, Div event2) {
