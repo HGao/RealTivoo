@@ -5,13 +5,6 @@ import java.util.List;
 import parsers.CalendarObject;
 
 public class XMLDateProcessor extends AbstractProcessor{
-    
-    public List<CalendarObject> filter(String[] dates,
-            List<CalendarObject> myCalendarObjects) {
-        
-        return super.filter(dates, myCalendarObjects);
-
-    }
 
     
     /**

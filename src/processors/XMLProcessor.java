@@ -11,6 +11,11 @@ public class XMLProcessor {
         {
           put("keyword", new XMLKeywordProcessor());
           put("date", new XMLDateProcessor());
+          put("noKeyword", new XMLKeywordExcludeProcessor());
+          put("sortName", new XMLNameSortProcessor());
+          put("sortStartDate", new XMLStartDateSortProcessor());
+          put("sortEndDate", new XMLEndDateSortProcessor());
+
         }
     };
 

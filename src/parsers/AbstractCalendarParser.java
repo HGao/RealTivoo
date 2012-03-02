@@ -7,7 +7,7 @@ import org.jdom.Element;
 public abstract class AbstractCalendarParser {
 
     public abstract List<CalendarObject> parseEvents(List<Element> eventList);
-    
+
     private HashMap<String, String> MonthToNumMap = new HashMap<String, String>() {
         {
             put("Jan", "01");
@@ -38,8 +38,9 @@ public abstract class AbstractCalendarParser {
 
         return ret;
     }
-    
-    public ArrayList<String> parseNames(List<Element> eventList, String parameter) {
+
+    public ArrayList<String> parseNames(List<Element> eventList,
+            String parameter) {
         ArrayList<String> ret = new ArrayList<String>();
         ArrayList<String> rawNameValues = parseParameter(eventList, parameter);
 
@@ -49,8 +50,6 @@ public abstract class AbstractCalendarParser {
 
         return ret;
     }
-    
-    
 
     protected String trim(String str) {
         return str.substring(0, str.length() - 1);
@@ -124,20 +123,105 @@ public abstract class AbstractCalendarParser {
 
     public String getEventName(String rawEventName) {
         return rawEventName;
-    }    
-    
+    }
+
     public String convertMonthNameToNum(String month) {
         return MonthToNumMap.get(month);
     }
-    
-    
+
     public static abstract class ParserFactory {
-    	
-    	public abstract boolean isThisParserType (String url);
-    	
-    	public abstract String getTypeOfCalendarDetected ();
-    	
-    	public abstract AbstractCalendarParser getParser ();
+
+        public abstract boolean isThisParserType(String url);
+
+        public abstract String getTypeOfCalendarDetected();
+
+        public abstract AbstractCalendarParser getParser();
+    }
+
+    public ArrayList<String> parseDate(List<Element> eventList, String date) {
+        ArrayList<String> eventDateList = new ArrayList<String>();
+        String[] eventDates = {};
+        for (int i = 17; i < eventList.size(); i++) {
+            if (eventList.get(i).getChildren().size() != 0) {
+                eventDates = ((Element) eventList.get(i).getChildren().get(6))
+                        .getText().split("\\s");
+                if (eventDates[0].equals("When:")) {
+                    eventDateList.add(getWhenDate(eventDates, date));
+                } else if (eventDates[0].equals("Recurring")) {
+                    eventDateList.add(getRecurringDate(eventDates));
+                }
+            }
+        }
+
+        return eventDateList;
+    }
+
+    private String getWhenDate(String[] eventDates, String type) {
+        String month = convertMonthNameToNum(eventDates[2]);
+        String day = eventDates[3].replace(",", "");
+        if (day.length() == 1)
+            day = "0" + day;
+        String year = eventDates[4];
+
+        String time = "";
+
+        if (type.equals("start")) {
+            time = parseTime(eventDates[5]);
+        } else if (type.equals("end")) {
+            time = parseTime(eventDates[7]);
+        }
+
+        return day + "-" + month + "-" + year + " " + time;
+
+    }
+
+    private String parseTime(String theTime) {
+        String hour = "";
+        String minute = "00";
+        String second = "00";
+
+        String[] time = theTime.split(":");
+
+        for (int i = 0; i < time.length; i++) {
+            time[i] = time[i].replace(" ", "");
+        }
+
+        if (theTime.contains("pm")) {
+            if (time.length == 1) {
+                hour = time[0].replace("pm", "");
+
+            } else {
+                hour = time[0];
+                minute = time[1].replace("pm", "");
+            }
+            if (!hour.equals("12")) {
+                hour = Integer.toString(Integer.parseInt(hour) + 12);
+            }
+        } else if (theTime.contains("am")) {
+            if (time.length == 1)
+                hour = time[0].replace("am", "");
+            else {
+                hour = time[0];
+                minute = time[1].replace("am", "");
+            }
+        }
+
+        if (hour.length() == 1)
+            hour = "0" + hour;
+
+        return hour + ":" + minute + ":" + second;
+    }
+
+    private String getRecurringDate(String[] eventDates) {
+        String[] date = eventDates[5].split("-");
+        String day = date[2];
+        String month = date[1];
+        String year = date[0];
+
+        String time = eventDates[6];
+
+        System.out.println(day + "-" + month + "-" + year + " " + time);
+        return day + "-" + month + "-" + year + " " + time;
     }
 
 }
